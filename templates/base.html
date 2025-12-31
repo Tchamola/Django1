@@ -1,0 +1,38 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "{% static "css/style.css" %}" />
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Mon Super site web</h1>
+        <nav>
+            <a href="{% url "home" %}">Acceuil</a>
+            <a href="{% url "apropos" %}">A propos</a>
+            <a href="{% url "contact" %}">Contact</a>
+            <a href="{% url "messages" %}">Messages</a>
+            {% if user.is_authenticated %}
+                {% comment %} <a href="{% url "logout" %}">Déconnexion</a> {% endcomment %}
+                <form method = "post" action = "{% url "logout" %}" style = "display: inline">
+                    {% csrf_token %}
+                    <button type = "submit" style = "background-color: red">Déconnexion</button>
+                </form>
+            {% else %}
+                <a href="{% url "login" %}">Connexion</a> 
+                <a href="{% url "signup" %}">S'inscrire</a> 
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <p>Contenu par défaut</p>
+        {% endblock%}
+    </main>
+
+
+</body>
+</html>

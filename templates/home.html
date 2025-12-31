@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+   
+
+        {% if user.is_authenticated %}
+             <h2>Bonjour, {{user.username}} !</h2>
+            <p>Vous êtes connecté</p>
+        {% else %}
+            Bonjour, invité !
+             <p>Veuillez vous connecté</p>
+        {% endif %}
+
+{% endblock %}
